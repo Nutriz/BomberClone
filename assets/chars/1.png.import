@@ -10,7 +10,7 @@ source_file="res://assets/chars/1.png"
 source_md5="cb5f5babd25323ab3be8d0b5ab43a63c"
 
 dest_files=[ "res://.import/1.png-5417bc444942679bed5b0f042817c39c.stex" ]
-dest_md5="60249c0716d985a90ba163de2cc6d829"
+dest_md5="875d08631c1457e89afd061ad2d6c9b0"
 
 [params]
 
@@ -19,7 +19,7 @@ compress/lossy_quality=0.7
 compress/hdr_mode=0
 compress/normal_map=0
 flags/repeat=0
-flags/filter=true
+flags/filter=false
 flags/mipmaps=false
 flags/anisotropic=false
 flags/srgb=2
@@ -28,5 +28,5 @@ process/premult_alpha=false
 process/HDR_as_SRGB=false
 stream=false
 size_limit=0
-detect_3d=true
+detect_3d=false
 svg/scale=1.0
