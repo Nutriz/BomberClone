@@ -11,7 +11,12 @@ config_version=3
 [application]
 
 config/name="BomberClone"
+run/main_scene="res://scenes/Game.tscn"
 config/icon="res://icon.png"
+
+[debug]
+
+shapes/collision/shape_color=Color( 0.7, 0, 0, 0.5 )
 
 [rendering]
 
