@@ -7,9 +7,9 @@
 
 custom_solver_bias = 0.0
 radius = 7.09681
-height = 3.02278
+height = 0.783135
 
-[sub_resource type="Animation" id=3]
+[sub_resource type="Animation" id=2]
 
 resource_name = "move_bot"
 length = 0.4
@@ -28,7 +28,7 @@ tracks/0/keys = {
 "values": [ 0, 4, 8 ]
 }
 
-[sub_resource type="Animation" id=4]
+[sub_resource type="Animation" id=3]
 
 resource_name = "move_left"
 length = 0.4
@@ -47,9 +47,8 @@ tracks/0/keys = {
 "values": [ 2, 6, 10 ]
 }
 
-[sub_resource type="Animation" id=2]
+[sub_resource type="Animation" id=4]
 
-resource_name = "move_right"
 length = 0.4
 loop = true
 step = 0.1
@@ -92,9 +91,6 @@ collision_layer = 1
 collision_mask = 1
 collision/safe_margin = 0.08
 script = ExtResource( 1 )
-__meta__ = {
-"_edit_lock_": true
-}
 player_speed = 4000
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." index="0"]
@@ -122,9 +118,9 @@ autoplay = ""
 playback_process_mode = 1
 playback_default_blend_time = 0.0
 playback_speed = 1.0
-anims/move_bot = SubResource( 3 )
-anims/move_left = SubResource( 4 )
-anims/move_right = SubResource( 2 )
+anims/move_bot = SubResource( 2 )
+anims/move_left = SubResource( 3 )
+anims/move_right = SubResource( 4 )
 anims/move_top = SubResource( 5 )
 blend_times = [  ]
 

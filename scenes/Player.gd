@@ -5,57 +5,44 @@ export var player_speed = 10
 
 var motion = Vector2();
 var player_state = "idle"
-var animator;
+onready var animator = $Sprite/AnimationPlayer
+
 var player_animation = "ilde"
 var player_next_animation = "ilde"
 
-func _ready():
-
-	animator = get_node("Sprite/AnimationPlayer");
-
-	pass
-
 func _process(delta):
 
-	getPlayerState(delta);
-	
-	setAnimation();
-	
+	get_player_state(delta)
+	set_animation()
 	move_and_slide(motion)
 	
 
-	pass
-
-
-func getPlayerState(delta):
+func get_player_state(delta):
 	
 	if(Input.is_action_pressed('ui_right')):
-		setMotion(delta,Vector2(player_speed,0))
-		player_next_animation = "move_right";
-		player_state = "moving";
+		set_motion(delta,Vector2(player_speed,0))
+		player_next_animation = "move_right"
+		player_state = "moving"
 	elif(Input.is_action_pressed('ui_left')):
-		setMotion(delta,Vector2(-player_speed,0))
-		player_next_animation = "move_left";
-		player_state = "moving";
+		set_motion(delta,Vector2(-player_speed,0))
+		player_next_animation = "move_left"
+		player_state = "moving"
 	elif(Input.is_action_pressed("ui_up")):
-		setMotion(delta,Vector2(0,-player_speed))
-		player_next_animation = "move_top";
-		player_state = "moving";
+		set_motion(delta,Vector2(0,-player_speed))
+		player_next_animation = "move_top"
+		player_state = "moving"
 	elif(Input.is_action_pressed("ui_down")):
-		setMotion(delta,Vector2(0,player_speed))
+		set_motion(delta,Vector2(0,player_speed))
 		player_next_animation = "move_bot"
-		player_state = "moving";
+		player_state = "moving"
 	else:
-		setMotion(delta,Vector2(0,0));
-		player_state = "idle";
+		set_motion(delta,Vector2(0,0));
+		player_state = "idle"
 		
 	
 		
 
-func setAnimation():
-	
-
-		
+func set_animation():		
 	if (player_next_animation != player_animation):
 		if(player_next_animation == "idle"):
 			animator.stop();
@@ -65,6 +52,6 @@ func setAnimation():
 	pass
 	
 
-func setMotion(delta,speed):
+func set_motion(delta,speed):
 	motion.x = speed.x*delta;
 	motion.y = speed.y*delta;
