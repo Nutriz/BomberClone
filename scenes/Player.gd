@@ -2,13 +2,14 @@ extends KinematicBody2D
 
 export var player_speed = 10
 
-
 var motion = Vector2();
 var player_state = "idle"
 onready var animator = $Sprite/AnimationPlayer
 
 var player_animation = "ilde"
 var player_next_animation = "ilde"
+
+enum {IDLE, MOVING, DIE}
 
 func _process(delta):
 
@@ -19,30 +20,28 @@ func _process(delta):
 
 func get_player_state(delta):
 	
-	if(Input.is_action_pressed('ui_right')):
-		set_motion(delta,Vector2(player_speed,0))
+	if(Input.is_action_pressed("move_right")):
+		set_motion(delta, Vector2(player_speed, 0))
 		player_next_animation = "move_right"
-		player_state = "moving"
-	elif(Input.is_action_pressed('ui_left')):
-		set_motion(delta,Vector2(-player_speed,0))
+		player_state = MOVING
+	elif(Input.is_action_pressed("move_left")):
+		set_motion(delta, Vector2(-player_speed, 0))
 		player_next_animation = "move_left"
-		player_state = "moving"
-	elif(Input.is_action_pressed("ui_up")):
-		set_motion(delta,Vector2(0,-player_speed))
+		player_state = MOVING
+	elif(Input.is_action_pressed("move_up")):
+		set_motion(delta, Vector2(0, -player_speed))
 		player_next_animation = "move_top"
-		player_state = "moving"
-	elif(Input.is_action_pressed("ui_down")):
-		set_motion(delta,Vector2(0,player_speed))
+		player_state = MOVING
+	elif(Input.is_action_pressed("move_down")):
+		set_motion(delta, Vector2(0, player_speed))
 		player_next_animation = "move_bot"
-		player_state = "moving"
+		player_state = MOVING
 	else:
-		set_motion(delta,Vector2(0,0));
-		player_state = "idle"
+		set_motion(delta, Vector2(0,0));
+		player_state = IDLE
 		
 	
-		
-
-func set_animation():		
+func set_animation():
 	if (player_next_animation != player_animation):
 		if(player_next_animation == "idle"):
 			animator.stop();
