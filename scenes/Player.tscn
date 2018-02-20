@@ -3,12 +3,6 @@
 [ext_resource path="res://scenes/Player.gd" type="Script" id=1]
 [ext_resource path="res://assets/chars/1.png" type="Texture" id=2]
 
-[sub_resource type="CapsuleShape2D" id=1]
-
-custom_solver_bias = 0.0
-radius = 7.09681
-height = 0.783135
-
 [sub_resource type="Animation" id=2]
 
 resource_name = "move_bot"
@@ -84,7 +78,13 @@ tracks/0/keys = {
 "values": [ 1, 5, 9 ]
 }
 
-[node name="Player" type="KinematicBody2D" index="0"]
+[sub_resource type="CapsuleShape2D" id=1]
+
+custom_solver_bias = 0.0
+radius = 7.09681
+height = 0.783135
+
+[node name="Player" type="KinematicBody2D"]
 
 input_pickable = false
 collision_layer = 1
@@ -96,14 +96,9 @@ __meta__ = {
 }
 player_speed = 4000
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="." index="0"]
+[node name="Sprite" type="Sprite" parent="." index="0"]
 
-position = Vector2( -0.199249, 1.19551 )
-shape = SubResource( 1 )
-_sections_unfolded = [ "Transform" ]
-
-[node name="Sprite" type="Sprite" parent="." index="1"]
-
+editor/display_folded = true
 texture = ExtResource( 2 )
 vframes = 7
 hframes = 4
@@ -123,5 +118,41 @@ anims/move_left = SubResource( 3 )
 anims/move_right = SubResource( 4 )
 anims/move_top = SubResource( 5 )
 blend_times = [  ]
+
+[node name="RayCasts" type="Node2D" parent="." index="1"]
+
+[node name="Left" type="RayCast2D" parent="RayCasts" index="0"]
+
+enabled = true
+exclude_parent = true
+cast_to = Vector2( -8, 0 )
+collision_mask = 1
+
+[node name="Right" type="RayCast2D" parent="RayCasts" index="1"]
+
+enabled = true
+exclude_parent = true
+cast_to = Vector2( 8, 0 )
+collision_mask = 1
+
+[node name="Up" type="RayCast2D" parent="RayCasts" index="2"]
+
+enabled = true
+exclude_parent = true
+cast_to = Vector2( 0, -8 )
+collision_mask = 1
+
+[node name="Down" type="RayCast2D" parent="RayCasts" index="3"]
+
+enabled = true
+exclude_parent = true
+cast_to = Vector2( 0, 9 )
+collision_mask = 1
+_sections_unfolded = [ "Transform" ]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." index="2"]
+
+position = Vector2( -0.199249, 1.19551 )
+shape = SubResource( 1 )
 
 

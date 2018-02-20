@@ -45,6 +45,8 @@ position = Vector2( 114, 39 )
 
 [node name="Blocks" type="Node" parent="." index="3"]
 
+editor/display_folded = true
+
 [node name="Block" parent="Blocks" index="0" instance=ExtResource( 4 )]
 
 position = Vector2( 130, 72 )
