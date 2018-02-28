@@ -9,8 +9,8 @@ func destroy():
 		$CollisionShape2D.queue_free()
 		$Timer.start()
 
-		var drop = randi() % 3
-		if drop == 2:
+		var must_drop = randi() % 3
+		if must_drop == 2:
 			emit_signal("drop_item", self.position)
 
 
