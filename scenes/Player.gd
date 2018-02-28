@@ -63,3 +63,7 @@ func set_animation():
 func set_motion(delta, speed):
 	motion.x = speed.x*delta;
 	motion.y = speed.y*delta;
+	
+func _on_item_picked(item):
+	printt("item picked", item)
+	# TODO : consumes item

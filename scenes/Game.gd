@@ -31,5 +31,5 @@ func is_in_player_zones(cell_pos):
 func drop_item(position):
 	var item = item_scn.instance()
 	item.position = position
+	item.connect("item_picked", $Player, "_on_item_picked")
 	$Items.add_child(item)
-	# todo	$Player.connect("_on_item_picked", item)

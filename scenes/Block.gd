@@ -13,6 +13,5 @@ func destroy():
 		if must_drop == 2:
 			emit_signal("drop_item", self.position)
 
-
 func _on_Timer_timeout():
 	self.queue_free()

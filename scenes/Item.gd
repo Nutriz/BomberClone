@@ -1,7 +1,7 @@
 extends Area2D
 
 enum Types {BOMB, EXPAND_BOMB}
-signal _on_item_picked
+signal item_picked
 
 var item_type
 var sprite
@@ -10,7 +10,6 @@ var sprite
 func _ready():
 	define_item_type()
 	show_item()
-
 
 func define_item_type():
 	if randi() % 2 == 0:
@@ -31,12 +30,10 @@ func hide_item():
 	$Tween.start()
 
 func _on_Item_body_entered(body):
-	printt(body, " picked ", item_type)
-	emit_signal("_on_item_picked", item_type)
+	emit_signal("item_picked", item_type)
 	hide_item()
 
 func _on_Tween_tween_completed(object, key):
 	# if alpha is at 0 after tweening = item consumed, so delete it
 	if object.modulate.a == 0:
-		printt("delete")
 		self.queue_free()
