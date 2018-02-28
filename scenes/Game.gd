@@ -1,6 +1,7 @@
 extends Node
 
 onready var block_scn = preload("res://scenes/Block.tscn")
+onready var item_scn = preload("res://scenes/Item.tscn")
 
 const TILEMAP_WIDTH = 14
 const TILEMAP_HEIGHT = 12
@@ -21,7 +22,14 @@ func spawn_bricks():
 				if cell_id == FLOOR_BLOCK and rand_range(0, 2) < 1:
 					var block = block_scn.instance()
 					block.position = $TileMap.map_to_world(cell_pos) + Vector2(8,8) # +8 because block pos is centered
+					block.connect("drop_item", self, "drop_item")
 					$Blocks.add_child(block)
 
 func is_in_player_zones(cell_pos):
 	return PLAYER1_ZONE.find(cell_pos) != -1 || PLAYER2_ZONE.find(cell_pos) != -1
+
+func drop_item(position):
+	var item = item_scn.instance()
+	item.position = position
+	$Items.add_child(item)
+	# todo	$Player.connect("_on_item_picked", item)

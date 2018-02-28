@@ -57,7 +57,9 @@ _sections_unfolded = [ "Cell", "Collision", "Transform" ]
 
 [node name="Blocks" type="Node2D" parent="." index="2"]
 
-[node name="Player" parent="." index="3" instance=ExtResource( 3 )]
+[node name="Items" type="Node2D" parent="." index="3"]
+
+[node name="Player" parent="." index="4" instance=ExtResource( 3 )]
 
 position = Vector2( 24.0578, 25.7351 )
 
