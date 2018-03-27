@@ -11,24 +11,19 @@ var player_next_animation = "ilde"
 
 enum {IDLE, MOVING, DIE}
 
-var todel = 0
+var bomb_count = 1
+var bomb_power = 1 # in tile unit
+var can_bombing = true
+
+onready var bomb_scn = preload("res://scenes/Bomb.tscn")
 
 func _process(delta):
-
 	get_player_state(delta)
 	set_animation()
 	move_and_slide(motion)
 
-	# for breakable bricks test
-	check_collision()
-
-func check_collision():
-	for ray in $RayCasts.get_children():
-		if ray.is_colliding() and ray.get_collider().has_method("destroy"):
-			ray.get_collider().destroy()
 
 func get_player_state(delta):
-
 	if(Input.is_action_pressed("move_right")):
 		set_motion(delta, Vector2(player_speed, 0))
 		player_next_animation = "move_right"
@@ -49,6 +44,11 @@ func get_player_state(delta):
 		set_motion(delta, Vector2(0,0));
 		player_state = IDLE
 
+	if (Input.is_action_pressed("drop_bomb")):
+		if can_bombing and bomb_count > 0:
+			bomb_count -= 1
+			drop_bomb()
+
 
 func set_animation():
 	if (player_next_animation != player_animation):
@@ -63,7 +63,23 @@ func set_animation():
 func set_motion(delta, speed):
 	motion.x = speed.x*delta;
 	motion.y = speed.y*delta;
-	
+
+func drop_bomb():
+	var bomb = bomb_scn.instance()
+	bomb.position = position
+	bomb.connect("explode", self, "_on_bomb_explode")
+	$"..".add_child(bomb)
+	can_bombing = false
+	$CanBombingTimer.start()
+
 func _on_item_picked(item):
-	printt("item picked", item)
-	# TODO : consumes item
+	if item.item_type == item.Types.BOMB:
+		bomb_count += 1
+	elif item.item_type == item.Types.EXPAND_BOMB:
+		bomb_power += 1
+
+func _on_bomb_explode():
+	bomb_count += 1
+
+func _on_CanBombingTimer_timeout():
+	can_bombing = true

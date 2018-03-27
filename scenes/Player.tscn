@@ -87,10 +87,11 @@ height = 0.783135
 [node name="Player" type="KinematicBody2D"]
 
 input_pickable = false
-collision_layer = 1
+collision_layer = 3
 collision_mask = 1
 collision/safe_margin = 0.08
 script = ExtResource( 1 )
+_sections_unfolded = [ "Collision" ]
 __meta__ = {
 "_edit_group_": true
 }
@@ -119,42 +120,18 @@ anims/move_right = SubResource( 3 )
 anims/move_top = SubResource( 4 )
 blend_times = [  ]
 
-[node name="RayCasts" type="Node2D" parent="." index="1"]
-
-editor/display_folded = true
-
-[node name="Left" type="RayCast2D" parent="RayCasts" index="0"]
-
-enabled = true
-exclude_parent = true
-cast_to = Vector2( -8, 0 )
-collision_mask = 1
-
-[node name="Right" type="RayCast2D" parent="RayCasts" index="1"]
-
-enabled = true
-exclude_parent = true
-cast_to = Vector2( 8, 0 )
-collision_mask = 1
-
-[node name="Up" type="RayCast2D" parent="RayCasts" index="2"]
-
-enabled = true
-exclude_parent = true
-cast_to = Vector2( 0, -8 )
-collision_mask = 1
-
-[node name="Down" type="RayCast2D" parent="RayCasts" index="3"]
-
-position = Vector2( 0, 1 )
-enabled = true
-exclude_parent = true
-cast_to = Vector2( 0, 8 )
-collision_mask = 1
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="." index="2"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." index="1"]
 
 position = Vector2( -0.199249, 1.19551 )
 shape = SubResource( 5 )
+
+[node name="CanBombingTimer" type="Timer" parent="." index="2"]
+
+process_mode = 1
+wait_time = 0.2
+one_shot = false
+autostart = false
+
+[connection signal="timeout" from="CanBombingTimer" to="." method="_on_CanBombingTimer_timeout"]
 
 

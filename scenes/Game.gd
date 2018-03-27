@@ -13,6 +13,10 @@ const PLAYER2_ZONE = [Vector2(13, 11), Vector2(13, 10), Vector2(12, 11)]
 func _ready():
 	spawn_bricks()
 
+func _process(delta):
+	$Control/VBoxContainer/Bombs.text = "Bombs: " + str($Player.bomb_count)
+	$Control/VBoxContainer/Power.text = "Power: " + str($Player.bomb_power)
+
 func spawn_bricks():
 	for y in range(1, TILEMAP_HEIGHT):
 		for x in range(1, TILEMAP_WIDTH):
@@ -24,6 +28,7 @@ func spawn_bricks():
 					block.position = $TileMap.map_to_world(cell_pos) + Vector2(8,8) # +8 because block pos is centered
 					block.connect("drop_item", self, "drop_item")
 					$Blocks.add_child(block)
+					block.destroy()
 
 func is_in_player_zones(cell_pos):
 	return PLAYER1_ZONE.find(cell_pos) != -1 || PLAYER2_ZONE.find(cell_pos) != -1

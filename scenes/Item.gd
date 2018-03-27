@@ -30,7 +30,7 @@ func hide_item():
 	$Tween.start()
 
 func _on_Item_body_entered(body):
-	emit_signal("item_picked", item_type)
+	emit_signal("item_picked", self)
 	hide_item()
 
 func _on_Tween_tween_completed(object, key):
